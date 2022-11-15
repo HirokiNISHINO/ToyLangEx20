@@ -311,12 +311,15 @@ public class CodeGenerator
 		
 		this.printCode(	"and rsp, 0xFFFFFFFFFFFFFFF0 ; stack must be 16 bytes aligned to call a C function.");
 		this.printCode(	"push rax ; we need to preserve rax here.");
+		this.printCode( "push rax ; pushing twice for 16 byte alignment. We'll discard this later. ");
 		this.printCode();
 		this.printCode(	"; call printf to print out the exti code.");
-		this.printCode(	"lea rdi, [rel exit_fmt#] ; the format string");
+		this.printCode(	"lea rdi, [rel fmt] ; the format string");
 		this.printCode(	"mov rsi, rax		; the exit code ");
-		this.printCode(  "mov rax, 0			; no xmm register is used.");
+		this.printCode( "mov rax, 0			; no xmm register is used.");
 		this.printCode(	"call " + this.getExternalFunctionName("printf"));
+		this.printCode();
+		this.printCode(	"pop rax ; this value will be discared (as we did 'push rax' twice for 16 bytes alignment.");
 		this.printCode();
 		this.printCode(	"mov rax, "+ this.getExitSysCallNum() + "; specify the exit sys call.");
 		this.printCode(	"pop rdi ; this is the rax value we pushed at the entry of this sub routine");
