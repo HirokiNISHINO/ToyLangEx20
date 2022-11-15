@@ -26,7 +26,7 @@ public class CodeGenerator
 {
 	protected Platform		platform;
 	protected String 		filename;
-	protected AstNode			program	;
+	protected AstNode		program	;
 	protected PrintWriter 	writer	;
 	
 	protected SymbolTable	symbolTable;
@@ -83,7 +83,7 @@ public class CodeGenerator
 	 */
 	public String getExitSysCallNum()
 	{
-		return (this.platform == Platform.MAC ? "0x2000001" : "0x01");
+		return (this.platform == Platform.MAC ? "0x2000001" : "60");
 	}
 	
 	/**
