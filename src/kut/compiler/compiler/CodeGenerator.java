@@ -314,7 +314,7 @@ public class CodeGenerator
 		this.printCode( "push rax ; pushing twice for 16 byte alignment. We'll discard this later. ");
 		this.printCode();
 		this.printCode(	"; call printf to print out the exti code.");
-		this.printCode(	"lea rdi, [rel fmt] ; the format string");
+		this.printCode(	"lea rdi, [rel exit_fmt#] ; the format string");
 		this.printCode(	"mov rsi, rax		; the exit code ");
 		this.printCode( "mov rax, 0			; no xmm register is used.");
 		this.printCode(	"call " + this.getExternalFunctionName("printf"));
